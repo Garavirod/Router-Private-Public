@@ -32,6 +32,15 @@ export const Navbar = () => {
                     >
                         DC
                     </NavLink>
+
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/search-hero"
+                    >
+                        Search heroe
+                    </NavLink>
                 </div>
             </div>
 
