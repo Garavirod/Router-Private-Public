@@ -1,8 +1,8 @@
 import { HeroeList } from "../components/heroe/HeroeList";
+import { heroes } from "../data/HeroesData";
 
 
-export const getHeroeById = (props)=>{
-    const {id} = props;
+export const getHeroeById = (id)=>{    
     // heroes is an object that comes from HeresList
-    return HeroeList.find(heroes=>heroes.id === id);
+    return heroes.find(h=>h.id === id);
 };
