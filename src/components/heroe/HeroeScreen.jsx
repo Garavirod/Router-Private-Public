@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import { getHeroeById } from "../../selectors/getHeroeById";
 
@@ -7,7 +7,13 @@ export const HeroeScreen = (props) => {
   const {history} = props;
 
   const { heroeId } = useParams(); //Hook which extract the params
-  const dataHero = getHeroeById(heroeId);
+
+  // Usig useMemo for optimazing the code
+  const dataHero = useMemo( ()=>
+    getHeroeById(heroeId),
+    [heroeId], //Only is activated if heroId changes
+  );
+
   // if not exist the id
   if (!dataHero) return <Redirect to="/" />;
   // Desestructuture the data
@@ -35,10 +41,10 @@ export const HeroeScreen = (props) => {
         <img
           src={`../assets/heroes/${heroeId}.jpg`}
           alt={superhero}
-          className="img-thumbnail"
+          className="img-thumbnail animate__animated animate__fadeInLeft"
         />
       </div>
-      <div className="col-8">
+      <div className="col-8 animate__animated animate__fadeInUp">
         <h3>{superhero}</h3>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
