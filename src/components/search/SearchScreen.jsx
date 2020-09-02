@@ -41,15 +41,14 @@ export const SearchScreen = (props) => {
 
   return (
     <div>
-      <h1>Search</h1>
+      <h1>Searching heroes</h1>
       <hr />
       <div className="row">
         <div className="col-5">
           <h4>Search a hero below</h4>
           <hr />
           <form action="" onSubmit={handleSubmit}>
-            <input
-              t
+            <input              
               type="text"
               value={hero_search}
               name="hero_search"
@@ -66,6 +65,23 @@ export const SearchScreen = (props) => {
         <div className="col-7">
           <h4>Results</h4>
           <hr />
+
+          {
+              (q==='')
+              &&
+              <div className="alert alert-info">
+                 <p>Search a hereo</p>
+              </div>
+          }
+
+          {
+              (q!=='' && heroesFilter.length===0)
+              &&
+              <div className="alert alert-danger">
+                <p>There are not results for <i>{q}</i></p>
+              </div>
+          }
+
           {heroesFilter.map((h) => (
             <HeroeCard {...h} key={h.id} />
           ))}
