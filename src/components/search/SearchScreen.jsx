@@ -20,7 +20,7 @@ export const SearchScreen = (props) => {
     hero_search: q, //initail forms's value
   };
   // Hook which process initialFrom
-  const [formValues, handleInputchange, reset] = useForm(initialForm);
+  const [formValues, handleInputchange] = useForm(initialForm);
 
   // desestruct of data that returns the Hook
   const { hero_search } = formValues;
