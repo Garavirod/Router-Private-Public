@@ -6,8 +6,12 @@ import { types } from '../../types/types';
 export const Navbar = () => {
     // using context
     const {user, dispatch} = useContext(AuthContext);
-    // Router dom is a privider, and we can use its props
-    // its props are the history.
+    /* 
+     Routerdom is a privider, and we can use its props
+     in this case is  'useHistory'
+     this way the components are more independence.
+    */
+
     const history = useHistory();
 
     const handleInput = () => {
