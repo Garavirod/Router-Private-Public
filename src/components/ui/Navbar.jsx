@@ -1,11 +1,21 @@
 import React, { useContext } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import { AuthContext } from '../../auth/AuthContext'
+import { types } from '../../types/types';
 
 export const Navbar = () => {
     // using context
-    const {user} = useContext(AuthContext);
+    const {user, dispatch} = useContext(AuthContext);
+    // Router dom is a privider, and we can use its props
+    // its props are the history.
+    const history = useHistory();
 
+    const handleInput = () => {
+        dispatch({
+            type:types.logout
+        });
+        history.replace("/login");
+    }
 
     
     return (
@@ -53,14 +63,12 @@ export const Navbar = () => {
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
     <span className="nav-item nav-link text-info">{user.name}</span>
-                    <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
-                        to="/login"
+                    <button                         
+                        className="nav-item nav-link btn"
+                        onClick={handleInput}                                                 
                     >
                         Logout
-                    </NavLink>
+                    </button>
                 </ul>
             </div>
         </nav>
