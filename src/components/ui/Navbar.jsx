@@ -1,27 +1,28 @@
-import React, { useContext } from 'react'
-import { Link, NavLink, useHistory } from 'react-router-dom'
-import { AuthContext } from '../../auth/AuthContext'
+import React, { useContext } from 'react';
+import { Link, NavLink, useHistory } from 'react-router-dom';
+import { AuthContext } from '../../auth/AuthContext';
 import { types } from '../../types/types';
 
 export const Navbar = () => {
-    // using context
-    const {user, dispatch} = useContext(AuthContext);
-    /* 
+
+    const { user:{ name }, dispatch } = useContext(AuthContext);
+        /* 
      Routerdom is a privider, and we can use its props
      in this case is  'useHistory'
      this way the components are more independence.
     */
-
     const history = useHistory();
 
-    const handleInput = () => {
+    const handleLogout = () => {
+
+        history.replace('/login');
+
         dispatch({
-            type:types.logout
+            type: types.logout
         });
-        history.replace("/login");
     }
 
-    
+
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
             
@@ -52,25 +53,29 @@ export const Navbar = () => {
                     >
                         DC
                     </NavLink>
-
+                    
                     <NavLink 
                         activeClassName="active"
                         className="nav-item nav-link" 
                         exact
-                        to="/search-hero"
+                        to="/search"
                     >
-                        Search heroe
+                        Search
                     </NavLink>
                 </div>
             </div>
 
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
-    <span className="nav-item nav-link text-info">{user.name}</span>
-                    <button                         
+
+                    <span className="nav-item nav-link text-info"> 
+                        { name }
+                    </span>
+
+                    <button 
                         className="nav-item nav-link btn"
-                        onClick={handleInput}                                                 
-                    >
+                        onClick={ handleLogout }
+                    > 
                         Logout
                     </button>
                 </ul>

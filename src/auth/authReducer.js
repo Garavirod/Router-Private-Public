@@ -1,19 +1,27 @@
-// A reducer is a simple function
+import { types } from '../types/types';
 
-import { types } from "../types/types";
+// const state = {
+//     name: 'Fernando',
+//     logged: true
+// }
 
-export const authReducer = (state = {}, action) =>{
-    switch (action.type) {
+
+export const authReducer = (state = {}, action ) => {
+
+    switch ( action.type ) {
         case types.login:
-            return{
+            return {
                 ...action.payload,
-                logged:true
-            };            
+                logged: true
+            }
+
         case types.logout:
             return {
-                logged:false
+                logged: false
             }
+    
         default:
-            return state;            
+            return state;
     }
-};
+
+}

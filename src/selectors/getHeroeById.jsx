@@ -1,4 +1,3 @@
-import { HeroeList } from "../components/heroe/HeroeList";
 import { heroes } from "../data/HeroesData";
 
 

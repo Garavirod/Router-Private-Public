@@ -1,33 +1,40 @@
-import React, { useContext } from 'react';
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import { LoginScreen } from "../components/login/LoginScreen";
-import {  DasboardRoutes } from './DashboardRoutes';
-import { PrivateRoute } from './CustomRoute2';
+import React, { useContext } from 'react'
+import {
+    BrowserRouter as Router,
+    Switch
+  } from 'react-router-dom';
+
 import { AuthContext } from '../auth/AuthContext';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+
+import { LoginScreen } from '../components/login/LoginScreen';
+import { DashboardRoutes } from './DashboardRoutes';
+
 
 
 export const RouterApp = () => {
-  // Using the context
-  const {user} = useContext(AuthContext);
-  console.log(user);
-  return (
-    <Router>
-      <div>
-        <Switch>
-          <Route 
-            exact 
-            path="/login" 
-            component={LoginScreen}
-             />
-          {/* If I prtected this route I protect all routes insde component */}
-          <PrivateRoute 
-            path="/" 
-            isAuthenticated={user.logged}
-            component={DasboardRoutes}
-                     
-          />
-        </Switch>
-      </div>
-    </Router>
-  );
-};
+
+    const { user } = useContext(AuthContext);
+
+    return (
+        <Router>
+            <div>
+                <Switch> 
+                    <PublicRoute 
+                        exact 
+                        path="/login" 
+                        component={ LoginScreen } 
+                        isAuthenticated={ user.logged }
+                    />
+                    
+                    <PrivateRoute 
+                        path="/" 
+                        component={ DashboardRoutes } 
+                        isAuthenticated={ user.logged }
+                    />            
+                </Switch>
+            </div>
+        </Router>
+    )
+}
